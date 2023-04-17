@@ -282,6 +282,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 554601792}
+  - {fileID: 1030586751}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10756,6 +10757,86 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7656838382089336571, guid: fdba11f42afeae54f9fdf635d34a289e, type: 3}
   m_PrefabInstance: {fileID: 965050390}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1030586750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1030586751}
+  - component: {fileID: 1030586753}
+  - component: {fileID: 1030586752}
+  m_Layer: 5
+  m_Name: Cheet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1030586751
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030586750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 122656737}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 117.70001, y: 69.75}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1030586752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030586750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 80
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 8
+    m_MaxSize: 80
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 'Cheet : OFF'
+--- !u!222 &1030586753
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030586750}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1053752340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11257,12 +11338,12 @@ MonoBehaviour:
     - obj:
       - {fileID: 2115469024}
       - {fileID: 405117396}
-      isTrue: 1
+      isTrue: 0
       Inside: 0
     - obj:
       - {fileID: 965050392}
       - {fileID: 2137607459}
-      isTrue: 0
+      isTrue: 1
       Inside: 0
     - obj:
       - {fileID: 1525269006}
@@ -12157,7 +12238,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ce2bdc71de8221046b5109f02c551f46, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
@@ -12380,12 +12461,14 @@ MonoBehaviour:
   switchCircleR: 0
   deg: 0
   spd: 1.6
+  durationT: 0
   switchImage:
   - {fileID: 594513320}
   - {fileID: 1174873482}
   switchPc: {fileID: 736903043}
   mapMG: {fileID: 1270316817}
-  t: 0
+  audio: {fileID: 1694087132}
+  cheetTxt: {fileID: 1030586752}
 --- !u!50 &1768647789
 Rigidbody2D:
   serializedVersion: 4

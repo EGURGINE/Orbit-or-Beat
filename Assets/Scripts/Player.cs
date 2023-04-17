@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     [SerializeField] GameManager gm;
@@ -12,57 +12,88 @@ public class Player : MonoBehaviour
     [SerializeField] private int switchCircleR;
     [SerializeField] private float deg;
     [SerializeField] private float spd;
+    [SerializeField] float durationT = 0;
 
     [SerializeField] private GameObject[] switchImage;
     [SerializeField] private ParticleSystem switchPc;
 
     [SerializeField] private Map mapMG;
-   
 
-    private void Start()
+    [SerializeField] private AudioSource audio;
+
+    private bool isGameOver;
+
+    private bool isCheet;
+    [SerializeField] private Text cheetTxt;
+    private IEnumerator Start()
     {
         mapMG.Spawn();
+
+        yield return new WaitForSeconds(1.5f);
+        StartSET();
     }
 
-    void Update()
+    private void StartSET()
     {
-        SwitchMove();
-        PlayerMove();
+        audio.Play();
+        isGameOver = false;
+        isCheet = false;
+        StartCoroutine(SwitchMove());
+        StartCoroutine(PlayerMove());
     }
-    [SerializeField] float t = 0;
-    private void PlayerMove()
+
+    IEnumerator PlayerMove()
     {
-        t += Time.deltaTime;
-
-        if (t < spd)
+        while (isGameOver == false)
         {
-            deg = Mathf.Lerp(0,360, t / spd);
-            var rad = Mathf.Deg2Rad * (deg);
-            var x = circleR[switchCircleR] * Mathf.Sin(rad);
-            var y = circleR[switchCircleR] * Mathf.Cos(rad);
+            yield return null;
 
-            transform.position = center.transform.position + new Vector3(x, y);
-        }
-        else
-        {
-            t = 0;
-            deg = 0;
-            mapMG.Spawn();
+            durationT += Time.deltaTime;
+
+            if (durationT < spd)
+            {
+                deg = Mathf.Lerp(0, 360, durationT / spd);
+                var rad = Mathf.Deg2Rad * (deg);
+                var x = circleR[switchCircleR] * Mathf.Sin(rad);
+                var y = circleR[switchCircleR] * Mathf.Cos(rad);
+
+                transform.position = center.transform.position + new Vector3(x, y);
+            }
+            else
+            {
+                durationT = 0;
+                deg = 0;
+                mapMG.Spawn();
+            }
         }
     }
 
-    private void SwitchMove()
+    private IEnumerator SwitchMove()
     {
-        if (Input.anyKeyDown)
+        while(isGameOver == false)
         {
-            switchCircleR = (switchCircleR == 0) ? 1 : 0;
+            yield return null;
 
-            switchPc.Play();
-            StartCoroutine(SwitchImage());
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                isCheet = (isCheet == true)? false : true;
+
+                string switchOn = (isCheet == true) ? "ON" : "OFF";
+
+                cheetTxt.text = $"Cheet : {switchOn}";
+            }
+
+
+            if (Input.anyKeyDown)
+            {
+                switchCircleR = (switchCircleR == 0) ? 1 : 0;
+
+                switchPc.Play();
+                StartCoroutine(SwitchImage());
+            }
+
         }
     }
-
-
     private IEnumerator SwitchImage()
     {
         switchImage[switchCircleR].SetActive(true);
@@ -78,7 +109,9 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-             gm.Die();
+            if (isCheet == true) return;
+            isGameOver = true;
+            gm.Die();
         }
     }
 
