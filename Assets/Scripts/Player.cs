@@ -11,7 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float[] circleR;
     [SerializeField] private int switchCircleR;
     [SerializeField] private float deg;
-    [SerializeField] private float spd;
+    readonly private float BPM = 96;
+    private float spd;
     [SerializeField] float durationT = 0;
 
     [SerializeField] private GameObject[] switchImage;
@@ -27,6 +28,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Text cheetTxt;
     private IEnumerator Start()
     {
+        spd = BPM / 60;
+
         mapMG.Spawn();
 
         yield return new WaitForSeconds(1.5f);
